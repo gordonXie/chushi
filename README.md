@@ -6,6 +6,7 @@
 
 - 需求文档（唯一准绳）：[认认 PRD v1.0](https://feishu.doubao.com/docx/MwQvdFWVOoywG3xLyPqcyXqAnfe)
 - 形态：Flutter 单代码库，一套代码出 iOS + Android
+- 版本固定：Flutter **3.47.5**（Dart 3.13.4，stable），通过 `.fvmrc` 交给 fvm 管理
 - 系统门槛：iOS 15+，Android 8.0+（minSdk 26）
 
 ## 功能
@@ -29,17 +30,22 @@ lib/
 
 ## 本地运行
 
+项目用 [fvm](https://fvm.app) 固定版本，先装好 fvm，然后：
+
 ```bash
-export PATH="/Users/tim/fvm/versions/3.38.6/bin:$PATH"   # 本地是 fvm 管理，按自己的 Flutter 路径改
-flutter pub get                                          # pubspec.lock 未入库，会重新解析依赖
-flutter analyze
-flutter test
-flutter run
+fvm install               # 按 .fvmrc 装 Flutter 3.47.5
+fvm use 3.47.5            # 已在项目里执行过，新克隆只需 fvm install
+fvm flutter pub get       # pubspec.lock 未入库，会重新解析依赖
+fvm flutter analyze       # 当前 0 issue
+fvm flutter test
+fvm flutter run
 ```
+
+不用 fvm 时，确认本机 `flutter --version` 是 3.47.5，直接跑 `flutter pub get / analyze / test / run` 即可。
 
 ## 已验证状态
 
-- `flutter analyze`：0 issue
+- Flutter 3.47.5（Dart 3.13.4）下 `flutter analyze`：0 issue
 - `flutter test`：5 条用例全过（内置卡 40 张与分类、哑卡不发声、录音卡识别、主题配色一致）
 - `flutter build apk --debug` / `--release`：均可成功出包，产物在 `build/app/outputs/flutter-apk/`
 - iOS 侧只完成了工程配置（Bundle ID `com.renren.chushi`、iOS 15 部署目标、四段权限文案、`.renren` 类型注册），**尚未在本机跑过 `pod install` 与真机编译**
@@ -49,4 +55,4 @@ flutter run
 - 内置 40 张卡片的图片位**暂用大号 emoji 承载**（体积小、跨端一致），后续换成正式插画只需改 `builtin_cards.dart` 的数据。
 - `.renren` 的系统级「点开即导入」已在 Android Manifest 与 iOS `Info.plist` 注册类型，Dart 侧的 intent / openURL 回调还没接，第一期先用「从文件导入」按钮兜住。
 - 平板：竖屏 2 列、横屏 4 列；iPad 与 10 英寸 Android 平板需真机验证。
-- 仓库以纯文本形式维护，图片、`gradle-wrapper.jar` 等二进制资源未入库；新克隆后跑一次 `flutter create --platforms=android,ios .` 补齐本地脚手架即可。
+- 新克隆仓库后如果缺少 `android/gradle/wrapper/gradle-wrapper.jar` 与 iOS 图标，跑一次 `flutter create --platforms=android,ios .` 就能补齐本地脚手架（本仓库以纯文本形式维护，二进制资源不进版本控制）。
