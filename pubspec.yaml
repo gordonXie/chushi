@@ -1,0 +1,32 @@
+name: chushi
+description: 认认 · 1—3 岁幼儿认知启蒙 App（看图点按即发声，家长可自制卡片，作品可跨设备带走）
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  path_provider: ^2.1.4
+  shared_preferences: ^2.3.2
+  flutter_tts: ^4.0.2
+  record: ^7.1.2
+  audioplayers: ^6.1.0
+  image_picker: ^1.1.2
+  image: ^4.2.0
+  archive: ^3.6.1
+  share_plus: ^10.0.0
+  file_picker: ^8.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
