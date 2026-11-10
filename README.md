@@ -30,16 +30,23 @@ lib/
 ## 本地运行
 
 ```bash
-export PATH="/Users/tim/fvm/versions/3.38.6/bin:$PATH"
-flutter pub get
-flutter analyze          # 当前 0 issue
+export PATH="/Users/tim/fvm/versions/3.38.6/bin:$PATH"   # 本地是 fvm 管理，按自己的 Flutter 路径改
+flutter pub get                                          # pubspec.lock 未入库，会重新解析依赖
+flutter analyze
 flutter test
 flutter run
 ```
+
+## 已验证状态
+
+- `flutter analyze`：0 issue
+- `flutter test`：5 条用例全过（内置卡 40 张与分类、哑卡不发声、录音卡识别、主题配色一致）
+- `flutter build apk --debug` / `--release`：均可成功出包，产物在 `build/app/outputs/flutter-apk/`
+- iOS 侧只完成了工程配置（Bundle ID `com.renren.chushi`、iOS 15 部署目标、四段权限文案、`.renren` 类型注册），**尚未在本机跑过 `pod install` 与真机编译**
 
 ## 现状与待办
 
 - 内置 40 张卡片的图片位**暂用大号 emoji 承载**（体积小、跨端一致），后续换成正式插画只需改 `builtin_cards.dart` 的数据。
 - `.renren` 的系统级「点开即导入」已在 Android Manifest 与 iOS `Info.plist` 注册类型，Dart 侧的 intent / openURL 回调还没接，第一期先用「从文件导入」按钮兜住。
 - 平板：竖屏 2 列、横屏 4 列；iPad 与 10 英寸 Android 平板需真机验证。
-- 新克隆仓库后如果缺少 `android/gradle/wrapper/gradle-wrapper.jar` 与 iOS 图标，跑一次 `flutter create --platforms=android,ios .` 就能补齐本地脚手架（本仓库以纯文本形式维护，二进制资源不���版本控制）。
+- 仓库以纯文本形式维护，图片、`gradle-wrapper.jar` 等二进制资源未入库；新克隆后跑一次 `flutter create --platforms=android,ios .` 补齐本地脚手架即可。
