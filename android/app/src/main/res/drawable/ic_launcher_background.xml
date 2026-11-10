@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 珊瑚橘底，与 App 内的单主色一致；纯 XML，仓库里不需要二进制图标。 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FF8A6B" />
+</shape>

@@ -1,0 +1,4 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 仅 profile 构建用；release 不声明 INTERNET，保证正式包里没有联网能力。 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
